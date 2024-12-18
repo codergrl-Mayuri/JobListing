@@ -3,9 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Search, LocateFixed, MapPin } from "lucide-react"; 
 import React from "react";
 
+
 export default function SearchBar() {
   return (
-    <div className="w-full p-4 flex justify-center">
+    <div
+      className={`w-full pt-10 p-4 flex justify-center transition-all duration-300`}
+    >
       <div className="flex items-center w-full max-w-xl sm:max-w-3xl md:max-w-4xl lg:max-w-5xl rounded-lg border border-gray-300 shadow-md bg-white overflow-hidden">
         <div className="relative flex items-center flex-grow px-2 sm:px-3 md:px-4">
           <Search className="absolute left-3 h-5 w-5 text-gray-400" />

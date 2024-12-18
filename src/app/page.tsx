@@ -10,11 +10,9 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-
-  // Simulate API loading state for skeleton loader
   useEffect(() => {
     const fetchData = () => {
-      setTimeout(() => setLoading(false), 1000); 
+      setTimeout(() => setLoading(false), 1000);
     };
     fetchData();
   }, []);
@@ -44,21 +42,67 @@ export default function Home() {
       location: "Dhaka, Bangladesh",
       logoUrl: "https://github.com/shadcn.png",
     },
+    {
+      id: 4,
+      title: "Marketing Officer",
+      salary: "$20,000 - $25,000",
+      company: "Google Inc.",
+      location: "Dhaka, Bangladesh",
+      logoUrl: "https://github.com/shadcn.png",
+    },
+    {
+      id: 5,
+      title: "Marketing Officer",
+      salary: "$20,000 - $25,000",
+      company: "Google Inc.",
+      location: "Dhaka, Bangladesh",
+      logoUrl: "https://github.com/shadcn.png",
+    },
+    {
+      id: 6,
+      title: "Marketing Officer",
+      salary: "$20,000 - $25,000",
+      company: "Google Inc.",
+      location: "Dhaka, Bangladesh",
+      logoUrl: "https://github.com/shadcn.png",
+    },
+    {
+      id: 7,
+      title: "Marketing Officer",
+      salary: "$20,000 - $25,000",
+      company: "Google Inc.",
+      location: "Dhaka, Bangladesh",
+      logoUrl: "https://github.com/shadcn.png",
+    },
+    {
+      id: 8,
+      title: "Marketing Officer",
+      salary: "$20,000 - $25,000",
+      company: "Google Inc.",
+      location: "Dhaka, Bangladesh",
+      logoUrl: "https://github.com/shadcn.png",
+    },
+    {
+      id: 9,
+      title: "Marketing Officer",
+      salary: "$20,000 - $25,000",
+      company: "Google Inc.",
+      location: "Dhaka, Bangladesh",
+      logoUrl: "https://github.com/shadcn.png",
+    },
+
   ];
 
   return (
     <>
-      <Header />
-      <div className="pt-16 px-9">
-        <main className="flex flex-col items-center justify-center flex-1 p-4">
+      <Header/>
+      <div className="flex flex-col min-h-screen">
+        <main className="flex-grow px-9 pb-10">
           <SearchBar />
-
-          {/* Job Cards Section */}
-          <section className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <section className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {loading
-              ? Array.from({ length: 3 }).map((_, index) => <SkeletonCard key={index} />)
-              : // Render Job Cards when loading is complete
-                jobData.map((job) => (
+              ? Array.from({ length: 6 }).map((_, index) => <SkeletonCard key={index} />)
+              : jobData.map((job) => (
                   <div
                     key={job.id}
                     onMouseEnter={() => setHoveredCard(job.id)}
@@ -70,14 +114,15 @@ export default function Home() {
                       company={job.company}
                       location={job.location}
                       logoUrl={job.logoUrl}
-                      isHovered={hoveredCard === job.id} // Real-time hover state
+                      isHovered={hoveredCard === job.id} 
                     />
                   </div>
                 ))}
           </section>
         </main>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 }
+

@@ -22,18 +22,11 @@ const JobCard: React.FC<JobCardProps> = ({
 }) => {
   return (
     <Card
-  className={`w-full h-40 border border-gray-200 shadow-md rounded-sm overflow-hidden transition-transform ease-in-out duration-300
-    ${
-      isHovered
-        ? "scale-105 border-gray-300 shadow-md bg-white"
-        : "bg-gradient-to-r from-gray-50 via-white to-gray-50"
-    }`}
->
-
-      <CardHeader className="p-3 text-left mr-8 ml-2"> 
-        <CardTitle className="text-base font-semibold mb-1">
-          {title}
-        </CardTitle>
+      className={`w-full h-40 border border-gray-200 shadow-md rounded-sm overflow-hidden transition-transform ease-in-out duration-300 transform
+        ${isHovered ? "scale-105 border-gray-300 shadow-lg bg-white" : "bg-gradient-to-r from-gray-50 via-white to-gray-50"}`}
+    >
+      <CardHeader className="p-3 text-left mr-8 ml-2">
+        <CardTitle className="text-base font-semibold mb-1">{title}</CardTitle>
         <div className="flex items-left gap-3">
           <Badge variant="secondary" className="w-fit text-green-500 bg-green-100">
             REMOTE
@@ -41,6 +34,7 @@ const JobCard: React.FC<JobCardProps> = ({
           <p className="text-sm text-gray-500">Salary: {salary}</p>
         </div>
       </CardHeader>
+
       <CardContent className="flex justify-start items-center p-3 gap-3 ml-2">
         <Image
           src={logoUrl}
