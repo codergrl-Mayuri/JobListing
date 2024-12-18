@@ -97,7 +97,7 @@ export default function Home() {
     <>
       <Header/>
       <div className="flex flex-col min-h-screen">
-        <main className="flex-grow px-9 pb-10">
+        <main className="flex-grow px-9 pb-6">
           <SearchBar />
           <section className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {loading
