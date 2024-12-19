@@ -23,7 +23,7 @@ const JobCard: React.FC<JobCardProps> = ({
   return (
     <Card
       className={`w-full h-40 border border-gray-200 shadow-md rounded-sm overflow-hidden transition-transform ease-in-out duration-300 transform
-        ${isHovered ? "scale-105 border-gray-300 shadow-lg bg-white" : "bg-gradient-to-r from-gray-50 via-white to-gray-50"}`}
+        ${isHovered ? "scale-105 border-gray-300 shadow-lg bg-gradient-to-r from-orange-100 to-white" : "bg-gradient-to-r from-gray-50 via-white to-gray-50"}`}
     >
       <CardHeader className="p-3 text-left mr-8 ml-2">
         <CardTitle className="text-base font-semibold mb-1">{title}</CardTitle>
