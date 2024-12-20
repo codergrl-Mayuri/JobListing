@@ -11,6 +11,22 @@ export default function SearchBar() {
   const [search, setSearch] = useQueryState("search", {defaultValue: ""})
   const [cityQuery, setCityQuery] = useQueryState("city", {defaultValue: ""});
 
+  // Check location permission status before calling geolocation
+  const checkLocationPermission = async () => {
+    try {
+      const permissionStatus = await navigator.permissions.query({ name: 'geolocation' });
+      if (permissionStatus.state === 'granted') {
+        // Proceed with getting the location if granted
+        handleGetLocation();
+      } else if (permissionStatus.state === 'denied') {
+        setLocationError("Location access is denied. Please enable location access in your browser settings.");
+      }
+    } catch (err) {
+      console.error(err);
+      setLocationError("Failed to check location permissions.");
+    }
+  };
+
   const handleGetLocation = () => {
     if (isActive) {
       setCity("");
@@ -64,9 +80,7 @@ export default function SearchBar() {
   };
 
   return (
-    <div
-      className={`w-full pt-10 p-4 flex justify-center transition-all duration-300`}
-    >
+    <div className={`w-full pt-10 p-4 flex justify-center transition-all duration-300`}>
       <div className="flex items-center w-full max-w-xl sm:max-w-3xl md:max-w-4xl lg:max-w-5xl rounded-lg border border-gray-300 shadow-md bg-white overflow-hidden">
         <div className="relative flex items-center flex-grow px-2 sm:px-3 md:px-4">
           <Search className="absolute left-3 h-5 w-5 text-gray-400" />
@@ -81,7 +95,7 @@ export default function SearchBar() {
             className={`absolute right-3 h-5 w-5 cursor-pointer sm:hidden ${
               isActive ? "text-blue-500" : "text-gray-400"
             }`} 
-            onClick={handleGetLocation}
+            onClick={checkLocationPermission} // Check permission before calling handleGetLocation
           />
         </div>
         <div className="h-8 w-px bg-gray-300 mx-1 sm:mx-2 hidden sm:block" />
@@ -98,7 +112,7 @@ export default function SearchBar() {
             className={`absolute right-3 h-5 w-5 cursor-pointer hidden sm:block ${
               isActive ? "text-blue-500" : "text-gray-400"
             }`} 
-            onClick={handleGetLocation}
+            onClick={checkLocationPermission} // Check permission before calling handleGetLocation
           />
         </div>
         <Button
