@@ -1,9 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Bookmark, MapPin } from "lucide-react";
+import { Bookmark, BookmarkCheck, MapPin } from "lucide-react"; // Import the filled bookmark icon
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 interface JobCardProps {
+  id: string | number;
   title: string;
   salary: string;
   company: string;
@@ -13,6 +15,7 @@ interface JobCardProps {
 }
 
 const JobCard: React.FC<JobCardProps> = ({
+  id,
   title,
   salary,
   company,
@@ -20,6 +23,27 @@ const JobCard: React.FC<JobCardProps> = ({
   logoUrl,
   isHovered = false,
 }) => {
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
+
+  useEffect(() => {
+    const bookmarkedJobs = JSON.parse(localStorage.getItem("bookmarkedJobs") || "[]");
+    setIsBookmarked(bookmarkedJobs.includes(id));
+  }, [id]);
+
+  const toggleBookmark = () => {
+    const bookmarkedJobs = JSON.parse(localStorage.getItem("bookmarkedJobs") || "[]");
+
+    if (isBookmarked) {
+      const updatedBookmarks = bookmarkedJobs.filter((jobId: string | number) => jobId !== id);
+      localStorage.setItem("bookmarkedJobs", JSON.stringify(updatedBookmarks));
+      setIsBookmarked(false);
+    } else {
+      const updatedBookmarks = [...bookmarkedJobs, id];
+      localStorage.setItem("bookmarkedJobs", JSON.stringify(updatedBookmarks));
+      setIsBookmarked(true);
+    }
+  };
+
   return (
     <Card
       className={`w-full h-40 border border-gray-200 shadow-md rounded-sm overflow-hidden transition-transform ease-in-out duration-300 transform
@@ -50,7 +74,18 @@ const JobCard: React.FC<JobCardProps> = ({
             {location}
           </div>
         </div>
-        <Bookmark className="h-5 w-5 text-gray-400 hover:text-black ml-auto mr-2" />
+        {/* Conditionally render the bookmark icon */}
+        {isBookmarked ? (
+          <BookmarkCheck
+            className="h-5 w-5 text-black hover:text-black ml-auto mr-2"
+            onClick={toggleBookmark}
+          />
+        ) : (
+          <Bookmark
+            className="h-5 w-5 text-gray-400 hover:text-black ml-auto mr-2"
+            onClick={toggleBookmark}
+          />
+        )}
       </CardContent>
     </Card>
   );
