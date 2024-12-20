@@ -48,7 +48,7 @@ export default function SearchBar() {
   };
 
   const getCityFromCoordinates = async (lat: number, lon: number): Promise<string> => {
-    const apiKey = "935bfa46d0924a9082aa54af050e268c"; 
+    const apiKey = process.env.NEXT_PUBLIC_OPENCAGE_API_KEY; 
     const response = await fetch(
       `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${apiKey}`
     );
