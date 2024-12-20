@@ -24,6 +24,8 @@ export function parseJobHTML(html: string): JobListing[] {
 
     jsonDatafromHtml.each((_, element) => {
       try {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         const jsonData = JSON.parse(element.children[0].data);
         jobJsonParsed.push(jsonData);
       } catch (error) {
